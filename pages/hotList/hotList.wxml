@@ -1,0 +1,84 @@
+<!--pages/hotList/hotList.wxml-->
+<wxs src='filter.wxs' module='filter' />
+
+<view class="wrapper">
+<!-- <view class="navbar_shadow"></view> -->
+<!-- 预告 -->
+  <view class="live" wx:if="{{liveNew.liveFlag}}" >
+    <view class="liveBox" wx:for = "{{liveNew.listData}}" wx:key="{{index}}" bindtap="toLvie" data-id="{{item.id}}" data-liveurl="{{item.live_info[0].url}}" data-title="{{item.topic_title}}" data-pic="{{item.indexpic}}" >
+        <image class="liveBackbord" src="{{item.indexpic != '' ? item.indexpic.host+item.indexpic.dir+item.indexpic.filepath+item.indexpic.filename : '../../images/default.png'}}"></image>
+        <view class="liveCnt">
+            <text class="liveCntTxt">{{item.topic_title}}</text>
+            <view class="tvCntBottom">
+              <view class="btmtitle">
+                  <image class="joinImg" src="../../images/join.png"></image>
+                  <view class="desribe">
+                  {{filter.personData(item.click_num)}}
+                  </view>
+              </view>
+              <view class="btmtitle">
+                  <image class="countDown" src="../../images/count_down.png"></image>
+                  <view class="desribe">
+                  {{item.start_time_show}}
+                  </view>
+              </view>
+            </view>
+        </view> 
+        <image class="btmState" src='../../images/announce.png'></image>
+    </view>
+  </view>
+    <!-- 直播 -->
+  <view class="live" wx:if="{{liveNow.liveFlag}}">
+    <view class="liveBox" wx:for = "{{liveNow.listData}}" wx:key="{{index}}" bindtap="toLvie" data-id="{{item.id}}" data-liveurl="{{item.live_info[0].url}}" data-title="{{item.title}}" data-pic="{{item.indexpic}}" >
+        <image class="liveBackbord" src="{{item.indexpic != '' ? item.indexpic.host+item.indexpic.dir+item.indexpic.filepath+item.indexpic.filename : '../../images/default.png'}}"></image>
+        <view class="liveCnt">
+            <text class="liveCntTxt">{{item.title}}</text>
+            <view class="tvCntBottom">
+              <view class="btmtitle">
+                  <image class="joinImg" src="../../images/join.png"></image>
+                  <view class="desribe">
+                  {{filter.personData(item.click_num)}}
+                  </view>
+              </view>
+              <view class="btmtitle">
+                  <image class="countDown" src="../../images/count_down.png"></image>
+                  <view class="desribe">
+                  {{item.start_time_show}}
+                  </view>
+              </view>
+            </view>
+        </view> 
+        <image class="btmState" src='../../images/live.png'></image> 
+    </view>
+  </view>
+  
+<!-- 回顾 -->
+  <view class="live" wx:if="{{liveOld.liveFlag}}">
+    <view class="liveBox" wx:for = "{{liveOld.listData}}" wx:key="{{index}}" bindtap="toLvie" data-id="{{item.id}}" data-liveurl="{{item.live_info[0].url}}" data-title="{{item.title}}" data-pic="{{item.indexpic}}" >
+        <image class="liveBackbord" src="{{item.indexpic != '' ? item.indexpic.host+item.indexpic.dir+item.indexpic.filepath+item.indexpic.filename : '../../images/default.png'}}"></image>
+        <view class="liveCnt">
+            <text class="liveCntTxt">{{item.title}}</text>
+            <view class="tvCntBottom">
+              <view class="btmtitle">
+                  <image class="joinImg" src="../../images/join.png"></image>
+                  <view class="desribe">
+                  {{filter.personData(item.click_num)}}
+                  </view>
+              </view>
+              <view class="btmtitle">
+                  <image class="countDown" src="../../images/count_down.png"></image>
+                  <view class="desribe">
+                  {{item.start_time_show}}
+                  </view>
+              </view>
+            </view>
+        </view> 
+        <image class="btmState" src='../../images/reload.png'></image>
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view> 
+</view> 

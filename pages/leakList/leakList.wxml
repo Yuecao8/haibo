@@ -1,0 +1,24 @@
+<view wx:if="{{leakFlag == true}}" class="listBox">
+  <view class='list_box' wx:for="{{leakdetail.listData}}" wx:key="{{index}}" bindtap='toLeakVideo' data-id='{{item.id}}'>
+    <view class="list_content">
+      <view class="list_card">
+        <image src="{{item.indexpic ? item.indexpic.host+item.indexpic.dir+'274x168'+'/'+item.indexpic.filepath+item.indexpic.filename : '../../images/default.png'}}"></image>
+      </view>
+      <view class="list_text">
+        <view>{{item.title}}</view>
+        <text>{{item.forwardTime}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+   </view>
+</view> 
+
+<!-- 什么都没有 -->
+<view wx:else  class="scrollNullZb">
+  <image src="../../images/null.jpg"></image>
+  <text>这里什么都没有</text>
+</view>

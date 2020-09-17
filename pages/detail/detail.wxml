@@ -1,0 +1,253 @@
+<!--pages/detail/detail.wxml-->
+<view class="d_view">
+<!-- <tabBar id="tarBar"></tabBar> -->
+  <view class="d_indexImg" wx:if="{{other_info.pictures == undefined}}">
+    <image src="{{imgStaus==false ? '../../images/default.png' : detailImg }}"></image>
+  </view>
+  <!-- <view class="d_indexImg" wx:if="{{other_info.pictures == undefined}}"> 
+    <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="5000" duration="1000">  
+      <block wx:for="{{imgStaus==false ? '../../images/default.png' : detailImg }}" wx:for-index="index">  
+        <swiper-item>  
+          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>  
+        </swiper-item>  d_indexImg
+      </block>  
+    </swiper>  
+  </view> -->
+  <view class='d_indexImg'  wx:if="{{other_info.pictures != undefined}}">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" circular="true" autoplay="true" interval="5000" duration="1000" indicator-active-color="#fff">
+      <block wx:for="{{other_info.pictures}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item.host+item.dir+'640x300'+'/'+item.filepath+item.filename}}" class="d_slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="d_detailHeader">
+    <view class="d_title" >{{title}}</view>
+    <view class="d_brief" wx:if="{{describes !=''}}">
+      <text>{{describes}}</text>
+    </view>
+        <!-- 头部滑动区域 -->
+        <view class="d_sliderArea" >
+        <!-- 头部滑动图片区域 -->
+          <!-- <view class='d_sliderImg'  wx:if="{{other_info.pictures != undefined}}">
+            <swiper indicator-dots="{{indicatorDots}}" circular="true" indicator-active-color="#fff">
+              <block wx:for="{{other_info.pictures}}" wx:key="*this">
+                <swiper-item>
+                  <image src="{{item.host+item.dir+'640x300'+'/'+item.filepath+item.filename}}" class="d_slide-image" />
+                </swiper-item>
+              </block>
+            </swiper>
+          </view> -->
+        <!-- 头部滑动图片区域 -->
+        <!-- 头部滑动视频区域 -->                  
+          <view class='d_sliderVideo' wx:if="{{quoteData.videoData != undefined}}" wx:for="{{quoteData.videoData}}" wx:key="*this">
+            <video src="{{item.url}}"   controls poster="{{item.img_info}}"></video>
+            <!-- <view class="shade">
+                <image class="model-img" mode="aspectFill" src="{{item.poster}}"></image>
+                <view class="model-btn">
+                    <view class="play-icon"></view>
+                </view> 
+            </view> -->
+          </view>
+          <!-- 头部滑动视频区域 --> 
+          <!-- 头部滑动音频区域 --> 
+          <view class='d_sliderAudio' wx:for="{{quoteData.audioData}}" wx:if="{{quoteData.audioData != undefined}}" wx:key="*this">
+          <audio  src="{{item.url}}" id="d_myAudio" name="{{item.title}}" poster="http://img.v1.m2odemo.com/material/tuji/img/2015/08/201508251549063F4g.jpg" controls loop></audio>
+          </view>
+          <!-- 头部滑动音频区域 --> 
+          <!-- 头部滑动引用区域 --> 
+          <view class='d_sliderRefere' wx:for="{{quoteData.publishData}}" wx:if="{{quoteData.publishData != undefined}}" bindtap="toArticle" data-id="{{item.id}}" data-type="{{item.module_id}}" wx:key="*this">
+            <view class='d_RefereImg'>
+              <image src="{{item.img_info=='' ? '../../images/default.png' : item.img_info}}" ></image>
+            <view class="d_refereIcon">引用</view>
+            </view>
+            <view class="d_RefereRight">
+                <view class="d_RefereTitle">{{item.title}}</view>
+                <view class="d_RefereName">{{item.module_name}}</view>
+            </view>
+          </view>
+        <!-- 头部滑动引用区域 -->
+         <!-- 头部引用描述部分 -->
+        <!-- <view class="d_refereBrief" wx:if="{{item.brief !='' && item}}"><text style="font-size:30rpx;color:#000;">描述:</text>{{item.brief}}</view>  -->
+       <!-- 头部引用描述部分 -->
+        </view>
+  </view>
+  <!-- 投票剩余时间 -->
+  <scroll-view style="width:100%;height: 100%;" scroll-y="true" bindscroll="scrollTopFun">
+    <view wx:if="{{detail_flag}}" class="d_overtime">
+        <!-- <text>投票剩余时间:{{countDownDay}}天{{countDownHour}}小时{{countDownMinute}}分{{countDownSecond}}秒</text> -->
+        <text>投票剩余时间:<text class="{{isActive ? 'd_active' : ''}}}">{{clock}}</text></text>
+    </view>  
+  </scroll-view>
+  <!-- 投票剩余时间 -->
+  <view class="d_detailBody">
+    <view class="d_checkType">
+      {{option_type==1 ? '单选' : '多选'}}
+    </view>
+    <text>投票总数:{{voteTotal}}</text>
+    <text>{{status_text}}</text>
+  </view>
+  <view class="d_checkList">
+    <!-- 多选 -->
+    <checkbox-group bindchange="checkboxChange" wx:if="{{option_type !=1}}" data-type='1'  >
+      <view class="d_listBody" wx:for="{{options}}" wx:key="*this" wx:for-index="idx"  data-id="{{item.id}}" data-index="{{item.indexId}}" >
+      <!-- 外层区域 -->
+      <view class="d_listBody_out">
+      <view class="d_listBody_left">
+        <text class="d_list_first">{{item.indexId}}.</text>
+        <checkbox wx:if="{{butDisplay}}" disabled="{{checkStaus}}" class="list_second" value="{{item.id}}"  />
+      </view>  
+      <view class="d_listBody_right" data-id="{{item.id}}" data-index="{{item.indexId}}" catchtap='jumpPersonal'>
+        <view class="d_list_third" wx:if="{{item.pictures_info != false}}">
+           <image  src="{{item.pictures_info.host+item.pictures_info.dir+'640x300'+'/'+item.pictures_info.filepath+item.pictures_info.filename}}">
+           </image>
+        </view>
+        <view class="d_list_fourth" data-id="{{item.id}}" data-index="{{item.indexId}}"  >
+          <view class="d_list_fourth_title">{{item.title}}</view>
+          <view class="d_list_fourth_describes" wx:if="{{item.describes.length !=0}}">{{item.describes}}</view>
+        </view>
+        <view class="d_list_fifth" data-index="{{idx}}" catchtap="switch" >   
+          <view wx:if="{{item.other_info != undefined}}" class="d_icon d_iconfont {{item.display==false ? 'icon-xiangshangjiantou' : 'icon-xiangxiajiantou'}}">
+          </view>
+          </view> 
+          </view> 
+        </view>
+        <!-- 外层区域 -->
+        <!-- 投票结果进度条显示 -->
+      <view class="d_voteResult" wx:if="{{resultDisplay}}">
+           <progress percent="{{item.ini_single/voteTotal*100}}"  active /> 
+            <!-- <text class="voteTicket">{{item.ini_single}}票</text>  -->
+            <!-- <text class="voteTicket">{{item.percent}}%</text>     -->
+            <text class="d_voteTicket">{{item.percent ==null ? 0 :item.percent}}%</text>                
+      </view>
+       <!-- 投票结果进度条显示 -->
+        <!-- 滑动区域 -->
+        <view class="d_sliderArea" wx:if="{{item.display}}">
+        <!-- 滑动图片区域 -->
+          <view class='d_sliderImg'  wx:if="{{item.other_info.pictures != undefined}}">
+            <swiper indicator-dots="{{indicatorDots}}" circular="true" indicator-active-color="#fff">
+              <block wx:for="{{item.other_info.pictures}}" wx:key="*this">
+                <swiper-item>
+                  <image src="{{item.host+item.dir+'640x300'+'/'+item.filepath+item.filename}}" class="d_slide-image" />
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+        <!-- 滑动图片区域 -->
+        <!-- 滑动视频区域 -->                  
+          <view class='d_sliderVideo' wx:if="{{item.other_info.videos != undefined}}">
+            <video src="{{item.other_info.videos[0].url}}"   controls poster="{{item.other_info.videos[0].img_info}}"></video>
+          </view>
+          <!-- 滑动视频区域 --> 
+          <!-- 滑动音频区域 --> 
+          <view class='d_sliderAudio' wx:if="{{item.other_info.audios != undefined}}">
+          <audio  src="{{item.other_info.audios[0].url}}" id="d_myAudio" name="{{item.other_info.audios[0].title}}" poster="http://img.v1.m2odemo.com/material/tuji/img/2015/08/201508251549063F4g.jpg" controls loop></audio>
+          </view>
+          <!-- 滑动音频区域 --> 
+          <!-- 滑动引用区域 --> 
+          <view class='d_sliderRefere' wx:if="{{item.other_info.publishcontents != undefined}}" bindtap="toArticle" data-id="{{item.other_info.publishcontents[0].id}}" data-type="{{item.other_info.publishcontents[0].module_id}}">
+            <view class='d_RefereImg'>
+              <image src="{{item.other_info.publishcontents[0].img_info=='' ? '../../images/default.png' : item.other_info.publishcontents[0].img_info}}" ></image>
+            <view class="d_refereIcon">引用</view>
+            </view>
+            <view class="d_RefereRight">
+                <view class="d_RefereTitle">{{item.other_info.publishcontents[0].title}}</view>
+                <view class="d_RefereName">{{item.other_info.publishcontents[0].module_name}}</view>
+            </view>
+          </view>
+        <!-- 滑动引用区域 -->
+         <!-- 引用描述部分 -->
+        <view class="d_refereBrief" wx:if="{{item.other_info.publishcontents[0].brief !='' && item.other_info.publishcontents}}"><text style="font-size:30rpx;color:#000;">描述:</text>{{item.other_info.publishcontents[0].brief}}</view> 
+       <!-- 引用描述部分 -->
+        </view> 
+        <!-- 滑动区域 -->
+      </view> 
+    </checkbox-group > 
+    <!-- 多选 -->
+    <!-- 单选 -->
+  <radio-group bindchange="checkboxChange" wx:if="{{option_type == 1}}" data-type='0' disabled="{{checkStaus}}">
+      <view class="d_listBody" wx:for="{{options}}" wx:key="*this" wx:for-index="idx" >
+      <!-- 外层区域 -->
+      <view class="d_listBody_out">
+        <view class="d_listBody_left">
+          <text class="d_list_first">{{item.indexId}}.</text>
+          <radio wx:if="{{butDisplay}}" disabled="{{checkStaus}}" class="d_list_second" value="{{item.id}}"  /> 
+       </view>
+       <view class="d_listBody_right" data-id="{{item.id}}" data-index="{{item.indexId}}" catchtap='jumpPersonal'>
+        <view class="d_list_third" wx:if="{{item.pictures_info != false}}">
+           <image  src="{{item.pictures_info.host+item.pictures_info.dir+'640x300'+'/'+item.pictures_info.filepath+item.pictures_info.filename}}">
+           </image>
+        </view>
+        <view class="{{item.other_info != undefined ?'d_list_fourth' :'d_list_fourth1'}}" >
+          <view class="{{ item.describes.length !=0 ? 'd_list_fourth_title_1' : 'd_list_fourth_title_2' }}">{{item.title}}</view>
+          <view class="d_list_fourth_describes" wx:if="{{item.describes.length !=0}}">{{item.describes}}</view>
+        </view>
+        <view class="d_list_fifth" data-index="{{idx}}" catchtap="switch" >   
+          <view wx:if="{{item.other_info != undefined}}" class="d_icon d_iconfont {{item.display==false ? 'd_icon-xiangshangjiantou' : 'd_icon-xiangxiajiantou'}}">
+          </view> 
+          </view>
+          </view> 
+        </view>
+        <!-- 外层区域 -->
+        <!-- 投票结果进度条显示 -->
+      <view class="d_voteResult" wx:if="{{resultDisplay}}">
+           <progress percent="{{item.ini_single/voteTotal*100}}"  active /> 
+            <!-- <text class="voteTicket">{{item.ini_single}}票</text>  -->
+            <text class="d_voteTicket">{{item.percent ==null ? 0 :item.percent}}%</text>       
+      </view>
+       <!-- 投票结果进度条显示 -->
+        <!-- 滑动区域 -->
+        <view class="d_sliderArea" wx:if="{{item.display}}">
+        <!-- 滑动图片区域 -->
+          <view class='d_sliderImg'  wx:if="{{item.other_info.pictures != undefined}}">
+            <swiper indicator-dots="{{indicatorDots}}" circular="true" indicator-active-color="#fff">
+              <block wx:for="{{item.other_info.pictures}}" wx:key="*this">
+                <swiper-item>
+                  <image src="{{item.host+item.dir+'640x300'+'/'+item.filepath+item.filename}}" class="d_slide-image" />
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+        <!-- 滑动图片区域 -->
+        <!-- 滑动视频区域 -->                  
+          <view class='d_sliderVideo' wx:if="{{item.other_info.videos != undefined}}">
+            <video src="{{item.other_info.videos[0].url}}"   controls poster="{{item.other_info.videos[0].img_info}}"></video>
+          </view>
+          <!-- 滑动视频区域 --> 
+          <!-- 滑动音频区域 --> 
+          <view class='d_sliderAudio' wx:if="{{item.other_info.audios != undefined}}">
+          <audio  src="{{item.other_info.audios[0].url}}" id="d_myAudio" name="{{item.other_info.audios[0].title}}" poster="http://img.v1.m2odemo.com/material/tuji/img/2015/08/201508251549063F4g.jpg" controls loop></audio>
+          </view>
+          <!-- 滑动音频区域 -->  
+          <!-- 滑动引用区域 --> 
+          <view class='d_sliderRefere' wx:if="{{item.other_info.publishcontents != undefined}}" bindtap="toArticle" data-id="{{item.other_info.publishcontents[0].id}}" data-type="{{item.other_info.publishcontents[0].module_id}}">
+            <view class='d_RefereImg'>
+              <image src="{{item.other_info.publishcontents[0].img_info}}" ></image>
+            <view class="d_refereIcon">引用</view>
+            </view>
+            <view class="d_RefereRight">
+                <view class="d_RefereTitle">{{item.other_info.publishcontents[0].title}}</view>
+                <view class="d_RefereName">{{item.other_info.publishcontents[0].module_name}}</view>
+            </view>
+          </view>
+        <!-- 滑动引用区域 -->
+        <!-- 引用描述部分 -->
+        <view class="d_refereBrief" wx:if="{{item.other_info.publishcontents &&item.other_info.publishcontents[0].brief !=''}}"><text style="font-size:30rpx;color:#000;">描述:</text>{{item.other_info.publishcontents[0].brief}}</view>        
+        </view>
+        <!-- 引用描述部分 --> 
+        <!-- 滑动区域 -->
+      </view> 
+    </radio-group>
+    <!-- 单选 -->
+  </view>
+  <view class="d_verify" wx:if="{{verifyDisplay}}">
+      <view class="d_verifyInput"><input value="{{inputValue}}" cursor-spacing="120" placeholder="请输入验证码" placeholder-class="verifyInput2" bindinput="bindKeyInput" auto-focus/></view>
+      <view class="d_verifyImg"><image bindtap="changeVerify" src='{{verifyImg}}'></image>
+      </view>      
+  </view>
+  <button bindtap="submit" class="d_subBut" wx:if="{{butDisplay}}" disabled="{{checkStaus}}">提交</button>
+   <!-- 调用modal组件 -->  
+<modal bind:myevent="onGetCode" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/> 
+ <view class="d_mask" wx:if="{{maskDisplay}}" ></view> 
+</view>

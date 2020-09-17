@@ -1,0 +1,8 @@
+@import "../detail/detail.wxss";
+@import "../news/index.wxss";
+.hidden{
+  display: none;
+}
+.wrapper{
+  margin-top: 100rpx;
+}

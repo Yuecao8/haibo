@@ -1,0 +1,44 @@
+.wrapper{
+  width:100%;
+  height:100rpx;
+  position: fixed;
+  top:0;
+  z-index:9999;
+  background-color:#fff;
+}
+.wrapper_list{
+  width:100%;
+  display: flex;
+  height:80rpx;
+}
+.item{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  font-size: 28rpx;
+  height:100%;
+  align-items: center;
+}
+.selected{
+  color:#03A4F6;
+}
+.wrapper_line{
+  width:100%;
+  display: flex;
+  height: 20rpx;
+}
+.topLine{
+  width:60%;
+  background:rgba(3,164,246,1); 
+  height:6rpx;
+}
+.line{
+  display: flex;
+  flex: 1;
+  height:20rpx;
+  justify-content: center;
+  color:rgba(3,164,246,1); 
+}
+.lineShow{
+  opacity:0;
+}

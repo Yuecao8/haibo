@@ -1,0 +1,208 @@
+/* pages/item/item.wxss */
+@import "../../wxParse/wxParse.wxss";
+.wraper{
+  width: 100%;
+  padding: 24rpx 24rpx 0;
+  box-sizing: border-box;
+}
+.wraper_title{
+  width: 100%;
+  font-size: 44rpx;
+  color: #333333;
+  font-weight: 500;
+}
+.wraper_text{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.wraper_text>text{
+  font-size: 24rpx;
+  color: #999999;
+}
+.wraper_content{
+  width: 100%;
+  box-sizing: border-box;
+}
+.wraper_contentVideo{
+  margin-top: 28rpx;
+}
+.wraper_contentVideo>video{
+  width: 100%;
+  height: 422rpx;
+}
+.wraper_contentImg{
+  box-sizing: border-box;
+  width: 100%;
+  height: 400rpx;
+  margin: 28rpx 0;
+}
+.wraper_contentImg>image{
+  width: 100%;
+  height: 400rpx;
+  border-radius: 8rpx;
+}
+.wraper_contentText{
+  font-size: 32rpx;
+  color:#333333;
+  line-height: 1.6;
+}
+.wraper_contentText image{
+  width: 100%!important;
+}
+.wraper_tuijian{
+  text-align: center;
+}
+.wraper_tuijian>text{
+  font-size: 30rpx;
+  color: #1560E6;
+  font-weight: 500;  
+}
+.wraper_line{
+  width: 24rpx;
+  height: 4rpx;
+  background: #1560E6;
+  margin: 16rpx auto 0;
+  border-radius: 4rpx;
+}
+.listBox{
+  width: 100%;
+  padding: 0 26rpx;
+  box-sizing: border-box;
+}
+.list_box{
+  width: 100%;
+  height: 228rpx;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  border-top: 2rpx solid #E5E5E5;
+}
+.list_content{
+  display: flex;
+}
+.list_card{
+  width: 274rpx;
+  height: 168rpx;
+  margin-right: 20rpx; 
+}
+.list_card>image{
+  width: 274rpx;
+  height: 168rpx;
+  border-radius: 12rpx;
+}
+.list_text{
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between; 
+}
+.list_text view{
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  text-overflow: -o-ellipsis-lastline;
+  text-align: left;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+}
+.list_text text{
+  font-size: 24rpx;
+  color: #999999;
+  text-align:left;
+}
+.wrap_comment{
+  text-align: center;
+}
+.wrap_title{
+  font-size: 30rpx;
+  color: #1560E6;
+  font-weight: 500;  
+}
+.commentBox{
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  border-top: 2rpx solid #E5E5E5;
+}
+.comment_box{
+  width: 100%;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+}
+.comment_box{
+  display: flex;
+  text-align: left;
+}
+.comment_card>image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  margin-right: 30rpx;
+}
+.comment_text>view{
+  font-size: 28rpx;
+  color: #74A9DE;
+  margin-bottom:16rpx;
+}
+.comment_text>text{
+  font-size: 32rpx;
+  color: #333333;
+}
+.comment_time{
+  position: absolute;
+  top: 30rpx;
+  right: 0;
+  font-size: 20rpx;
+  color: #999999;
+}
+.wrap_submit{
+  width: 100%;
+  height: 460rpx;
+  border-top: 2rpx solid #E4E4E4;
+}
+.submit_title{
+  margin-top: 44rpx;
+  display: flex;
+  align-items: center;
+}
+.submit_title>image{
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 16rpx;
+}
+.submit_title>text{
+  font-size: 30rpx;
+  color: #1560E6;
+  font-weight: 700;
+}
+.submit_content{
+  margin-top: 28rpx;
+}
+.section textarea{
+  width: 100%;  
+  height: 200rpx;
+  border: 2rpx solid #E5E5E5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+}
+.btn_area{
+  margin-top:30rpx;
+  width: 100%;
+  height: 90rpx;
+  
+}
+.btn_area>button{
+  background: rgb(16, 106, 236);
+  width: 100%;
+  height: 90rpx;
+  border-radius: 60rpx;
+  color: #FFFFFF;
+  font-size: 36rpx;
+}

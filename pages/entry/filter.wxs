@@ -1,0 +1,24 @@
+var personData = function(e,data){
+  var num = parseFloat(e);
+  if (num < 10000) {
+   return num + "人参与"
+  } else {
+    num = (num / 10000).toFixed(1)
+    return num + "万人参与"
+  }
+}
+var formatDuraton = function(e,data){
+  var targetMin 
+  var targetSec =
+  e = parseInt(e)
+  var newTime = parseInt(e)/1000
+  var min = Math.floor(newTime/60)
+  min < 10 ? targetMin = '0'+min : targetMin = min
+  var sec = Math.floor(newTime%60)
+  sec < 10 ? targetSec =  '0'+sec : targetSec = sec
+  return targetMin + ':' + targetSec
+}
+module.exports = {
+  personData: personData,
+  formatDuraton:formatDuraton
+};

@@ -1,0 +1,209 @@
+/* pages/detail/index.wxss */
+/* @import "../../wxParse/wxParse.wxss"; */
+.main{
+  font-size: 32rpx;
+  padding:30rpx;
+  background-color:#FCFCFC;
+  line-height: 50rpx;
+}
+.wxParse-inline{
+  text-indent: 2em;
+}
+.title{
+  width:100%;
+  font-size: 44rpx;
+  font-weight:700;
+  color:#222;
+  line-height: 54rpx;
+}
+.message{
+  width:100%;
+  height:56rpx;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin:25rpx 0;
+  color:#999999 !important;
+}
+.Introduction{
+  background-color:#f4f4f4;
+  width: calc(100% - 40rpx);
+  /* height:118rpx; */
+  padding:20rpx;
+  line-height:50rpx;
+  color:#696969;
+  margin-bottom:25rpx;
+  font-size:28rpx;
+  overflow: hidden;/*内容超出后隐藏*/
+  text-overflow: ellipsis;/* 超出内容显示为省略号*/
+  box-shadow: 0px 0px 1px #E4E4E4;
+  border-radius:10rpx; 
+}
+.article{
+  color:#595959;
+  margin: 20rpx 0 40rpx 0;
+  font-weight: normal;
+  padding: 0rpx 0rpx;
+  text-align: justify;
+  font-size: 34rpx;
+  line-height: 52rpx;
+  text-indent:2em;
+}
+.otherMessage{
+  display: flex;
+  flex-direction:column;
+  background-color:#f4f4f4;
+  color:#696969;
+  font-size:28rpx;
+  line-height: 50rpx;
+  padding:20rpx;
+  box-shadow: 0px 0px 1px #E4E4E4;
+  border-radius:10rpx;  
+}
+.otherMessage text{
+  display: inline-block;
+  width:100%;
+  margin-bottom:15rpx;
+}
+.otherMessage text:last-child{
+  margin-bottom: 0;
+}
+.review{
+  width:100%;
+  margin-top:38rpx;
+}
+.review_header{
+  display: flex;
+  align-items: center;
+  padding:20rpx 30rpx;
+  border-top:1rpx solid #e6e6e6;
+  background:#f9f9f9;
+  /* border-bottom:1rpx solid #e6e6e6;   */
+}
+.review_icon{
+  width:4rpx;
+  height:36rpx;
+  background-color:#5c9ad1;
+}
+.review_title{
+  margin-left:20rpx;
+  font-size:36rpx;
+  font-weight: 600;
+}
+.record{
+  /* display: flex;
+  align-items: center; */
+  height:106rpx;
+  overflow: hidden;
+  padding:0 30rpx;
+}
+.record_head{
+  width:100%;
+  display: flex;
+  align-items: center;
+  height:64rpx;
+  overflow: hidden;
+}
+.recordHead{
+  width:64rpx; 
+  height:64rpx;
+  margin: 0 5%;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+.recordHead image{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  display: inline-block;  
+}
+.review_list{
+  padding:45rpx 0;
+  background: #f9f9f9;
+}
+.record_time{
+  font-size:30rpx;
+  color:#5c9ad1;
+  flex-direction:column;
+  width:15%;
+  }
+.record_time_hour{
+  font-size:22rpx;
+  text-align: left;
+}
+.operatorName{
+  font-size:28rpx;
+  color:#666666;
+  width:25%;  
+}
+.recordBody{
+  width:35%; 
+  margin-left:5%;  
+  font-size:28rpx;
+}
+.record_time,.recordHead,.operatorName,.recordBody{
+  display: flex;
+}
+.blueColor{
+  color:#5c9ad1;
+}
+.yellowColor,.backButton{
+  color:#fd8159;
+}
+.line{
+  width:100%;
+  height:42rpx;
+}
+.verLine{
+  width:5rpx;
+  height:42rpx;
+  background:#c8c8c8;
+  margin-left: calc(20% - 5rpx)
+}
+.record:last-child .line{
+  display: none;
+}
+
+.record:last-child{
+  margin-bottom:0;
+}
+.record:last-child .line{
+  display: none;
+}
+.reviewButton{
+  width:100%;
+  height:88rpx;
+  display: flex;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+.auditButton,.backButton{
+  width:47.5%;
+  height: 100%;
+  border-radius:12rpx;
+  color:#fff;
+}
+.auditButton{
+  background:#5c9ad1;
+}
+.backButton{
+  background:#fd8159;
+}
+.hoverColor1{
+  background:#4682B4;
+}
+.hoverColor2{
+  background:#FF4500;
+}
+.wxParse-p {
+  overflow: hidden;
+  /* margin: 30rpx 0; */
+}
+.wxParse-p image{
+  width:100%;
+}
+
+.hideCs{
+  display: none;
+}

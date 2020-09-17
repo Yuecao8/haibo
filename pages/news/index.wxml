@@ -1,0 +1,64 @@
+<!--index.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="n_wrapper">
+  <!-- 有数据时显示 -->
+  <view wx:if="{{newsData.hasData==false}}">
+  <!-- 只有单条数据的显示情况 -->
+    <view wx:if="{{newsData.ruleKind==1}}">
+    <!--轮播图-->
+    <view class="d_indexImg2" wx:if="{{rule_img}}">
+      <!-- <image src="{{imgStaus==false ? '../../images/default.png' : detailImg }}"></image> -->
+      <image src="{{rule_img.host+rule_img.dir+'640x300'+'/'+rule_img.filepath+rule_img.filename}}"></image>
+    </view>
+    <!-- <view class='d_indexImg2'  wx:if="{{other_info.pictures != undefined}}">
+      <swiper class="swiper" indicator-dots="{{indicatorDots}}" circular="true" indicator-active-color="#fff">
+        <block wx:for="{{other_info.pictures}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item.host+item.dir+'640x300'+'/'+item.filepath+item.filename}}" class="d_slide-image" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view> -->
+      <!-- <view class="d_indexImg2"> 
+        <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="5000" duration="1000">  
+          <block wx:for="{{imgStaus==false ? '../../images/default.png' : detailImg }}" wx:for-index="index">  
+            <swiper-item>  
+              <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>  
+            </swiper-item>  
+          </block>  
+        </swiper>  
+      </view> -->
+      <view class="n_newsrule">
+        <template is="wxParse" data="{{wxParseData:rule.nodes}}"/>          
+      </view>
+    </view>
+  <!-- 多条数据的显示情况 -->   
+  <view wx:if="{{newsData.ruleKind==2}}">  
+  <view class="n_listWrapper" wx:if="{{newsData.hasData==false}}">
+    <view class="n_list" wx:for="{{newsData.listData}}" wx:key="*this" bindtap='jumpDetail_news' data-id="{{item.id}}" data-type="{{item.module_id}}">
+      <view class="n_list_left">
+        <image src="{{item.indexpic=='' ?'../../images/default.png':item.picSrc}}"></image>
+      </view>
+      <view class="n_list_right">
+        <text class='n_listTitle'>{{item.title}}</text>
+        <text class='n_listTime'>{{item.forwardTime}}</text>       
+      </view>      
+    </view>
+  </view>
+  <!--加载更多-->
+   <view class="n_weui-loadmore" hidden="{{newsData.isHideLoadMore}}">
+     <view class="n_weui-loading"></view>
+    <view class="n_weui-loadmore__tips">正在加载</view>
+   </view>
+    <view class="n_weui-loadmore" hidden="{{newsData.HideLoadMore}}">
+     <view class="n_weui-loadmore__tips">暂无更多数据...</view>
+        </view>
+      </view>
+    </view>
+    <!--加载更多-->
+    <!--无数据时显示-->
+    <view class="n_noData" wx:if="{{newsData.hasData}}">
+      暂无相关数据
+    </view>
+    <!--无数据时显示-->
+</view>

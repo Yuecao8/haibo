@@ -1,0 +1,12 @@
+var personData = function(e,data){
+  var num = parseFloat(e);
+  if (num < 10000) {
+   return num + "人参与"
+  } else {
+    num = (num / 10000).toFixed(1)
+    return num + "万人参与"
+  }
+}
+module.exports = {
+  personData: personData
+};

@@ -1,0 +1,42 @@
+<!--pages/live/live.wxml-->
+<view class="wrapper" wx:if="{{loadTrue}}">
+    <view class="tvPlayer">
+      <block wx:if="{{isAudio == 0 ? true : false}}">
+          <video src="{{videoUrl}}" controls autoplay='true'></video>
+      </block>
+      <block wx:elif="{{isAudio == 1 ? true : false}}">
+          <view class="audioBox">
+              <image class="audioPoster" src="../../images/poster.png"></image>
+              <view class="roateAudio">
+                <image class="audioImg {{music_on?'music_on':''}}" style="animation-play-state:{{music_playing?'running':'paused'}}" src="{{imgUrl.host + imgUrl.dir + '100x100'+ '/' + imgUrl.filepath +imgUrl.filename}}"></image>
+                <image wx:if="{{audio_state}}" class="audioImgstate" src="../../images/apause.png" bindtap='playAudio'></image>
+                <image wx:else class="audioImgstate" src="../../images/aplay.png" bindtap='stopAudio'></image>
+              </view> 
+          </view> 
+          <audio  src="{{videoUrl}}" id="myAudio"></audio>
+      </block> 
+    </view>
+    <view class="tvContent">
+        <view class="tvMenu">
+          <view class="menuBox {{currentTab==index ? 'active' : ''}}" wx:for="{{dateArr}}" data-idx="{{index}}" wx:key="{{index}}" bindtap="navbarTap">
+            <view class="boxList">{{item.date}}</view>
+          </view>
+        </view>
+        <scroll-view class="scrollProgram" scroll-y="true" scroll-top="{{scrollTop*65}}">
+          <view class="tvProgram">
+            <view class="programList" wx:for="{{videoMenu}}" wx:key="{{index}}" bindtap="{{item.display==1 ? 'checkProgram' :''}}" data-tvurl="{{item.m3u8}}" data-num="{{index}}">
+                <view class="listBox">
+                    <view class="listTheme {{item.now_play == 1 ? 'themeIng' : ''}} {{item.now_play ==0&&item.display==1? 'themeDisplay' : ''}} {{currentMenu == index && currentFlag == true ? 'themeIng' : ''}}">{{item.theme}}</view>
+                    <view class="list">
+                      <text class="listSub" wx:if="{{item.now_play == 1 ? true : false}}">正在直播： {{item.start}}-{{item.end}}</text>
+                      <text class="listSub" wx:elif="{{item.display == 0 ? true :false}}">预播： {{item.start}}-{{item.end}}</text>
+                      <text class="listSub" wx:elif="{{item.now_play ==0&&item.display==1 ? true :false}}">回看： {{item.start}}-{{item.end}}</text>
+                    </view>
+                </view>
+                <image class="listImg" src='../../images/ing.png' wx:if="{{item.now_play == 1 && defaultFlag == true ? true : false}}"></image>
+                <image class="listImg" src='../../images/ing.png' wx:elif="{{currentMenu == index && currentFlag == true? true : false}}"></image>
+            </view>
+          </view>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+  <view class="verify">
+      <view class="verifyInput">
+       <input value="{{inputValue}}" cursor-spacing="120" placeholder="请输入验证码" placeholder-class="verifyInput2" bindinput="bindKeyInput" auto-focus/>
+      </view>
+      <view class="verifyImg">
+        <image bindtap="changeVerify" src='{{verifyImg}}'></image>
+      </view>      
+  </view>

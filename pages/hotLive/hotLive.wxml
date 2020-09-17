@@ -1,0 +1,152 @@
+<wxs src='timeUtil.wxs' module='dateUtil' />
+<view class="wrapper" wx:if="{{showFalg}}">
+  <view wx:if="{{liveInfo[0].live_info[0].url != ''}}" class="wrapper_video">
+    <video src="{{ liveInfo[0].live_info[0].url }}" controls autoplay='true' ></video>
+  </view>
+  <view wx:else class="wrapper_image">
+    <image src="{{imgUrl != '' ? imgUrl : '../../images/default.png'}}"></image>
+  </view>
+  <view class="wrapper_tab" >
+    <view class="tab {{currentTab==index ? 'active' : ''}}" wx:for="{{tabArr}}" data-idx="{{index}}" bindtap="navbarTap" wx:key="{{index}}">
+      <text>{{item}}</text>
+    </view>
+  </view>
+  <!-- 直播 -->
+ <scroll-view class="scrollProgram" scroll-y="true" bindscrolltolower="lower" bindscrolltoupper="upper" hidden="{{currentTab!==0}}">
+    <!-- 上拉刷新     -->
+    <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在刷新</view>
+    </view>
+    <!-- 上拉刷新     -->
+    <view wx:if="{{dataZb}}" class="scrollBag">
+        <view wx:for="{{twArr.datalist}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="twDetail">
+            <view class="twCir">
+              <view class="twCirIg"></view>
+              <text>{{dateUtil.dateFormat(item.create_time,'hh:mm')}}</text>
+            </view>
+            <view class="commentBox">
+                <text>【直播员】{{item.user_name}}</text>
+                <view class="commentTt">{{item.content}}</view>
+                <view class="commentImg" wx:for="{{item.materail}}" wx:key="{{index}}">
+                  <block wx:if = "{{item.type == 'image'}}">
+                    <image src="{{item.host + item.dir + item.filepath + item.filename}}"></image>
+                  </block>
+                  <block wx:if = "{{item.type == 'video'}}">
+                    <video catchtap="startTap" src="{{item.m3u8}}" controls></video>
+                  </block>
+                </view>
+                <!-- 回复 -->
+                <!-- <view class="replayZb">
+                  <view class="replayZbCmt" data-threadid="{{item.id}}" catchtap="modalCmmt">回复</view>
+                </view> -->
+            </view>
+        </view>
+    </view> 
+
+    <view wx:else  class="scrollNullZb">
+      <image src="../../images/null.jpg"></image>
+      <text>这里什么都没有</text>
+    </view>
+    <!-- 评论 -->
+    <!-- <view class="publish">
+      <view class="publishCmt" bindtap="modalCmmt">
+          <view class="publishBox">
+            <image src="../../images/pen.png"></image>
+            <text>我要评论</text>
+          </view>
+          <image class="avatarIcn" src="{{avatar}}"></image>
+      </view>
+    </view> -->
+ </scroll-view>
+ <!-- 聊天室 -->
+ <scroll-view class="scrollProgram2" scroll-y="true" hidden="{{currentTab!==1}}" bindscrolltolower="lower" bindscrolltoupper="upper">
+  <!-- 上拉刷新     -->
+    <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在刷新</view>
+    </view>
+    <!-- 上拉刷新     -->
+  <view wx:if="{{dataCnt}}" class="scrollBag">
+    <view class="chatRoom" wx:for="{{chatArr.datalist}}" wx:key="{{index}}">
+        <view class="chatImg" wx:if="{{member_id != item.user_id}}">
+            <image src="{{!item.avatar || item.avatar.host == null ? '../../images/pretemit.png' : item.avatar.host + item.avatar.dir + item.avatar.filepath + item.avatar.filename}}"></image>
+        </view>
+        <view>
+          <view class="{{member_id != item.user_id ? 'dynamicTime' : 'dynamicTimeRight'}}">
+            <view class="dynamicUser">
+              <view class="dynamicUserLeft">
+                <view class="userName">用户|{{item.user_name}}</view>
+                <text class="userTime">{{dateUtil.dateFormat(item.create_time,'yyyy-MM-dd hh:mm')}}</text>
+              </view>              
+              <!-- 回复 -->
+              <view class="replayWrap">
+                <!-- <view></view> -->
+                <view class="replayCmt" data-replayid="{{item.id}}" bindtap="modalCmmt">回复</view>
+              </view>
+            </view>
+            <view class="dynamicCnt">{{item.content}}</view>
+            <view class="dynamicReplay" wx:if="{{item.reply_content}}">
+               <view class="replayBox">
+                  <view class="replayUser">
+                    <view class="replayImg">用户|{{item.reply_user_name}}</view>
+                    <text class="replayTt">{{dateUtil.dateFormat(item.reply_create_time,'yyyy-MM-dd hh:mm')}}</text>
+                  </view> 
+                  <view class="replayCnt">{{item.reply_content}}</view>
+               </view>
+            </view>
+          </view>  
+        </view>  
+        <view class="chatImg" wx:if="{{member_id == item.user_id}}">
+            <image src="{{!item.avatar || item.avatar.host == null ? '../../images/pretemit.png' : item.avatar.host + item.avatar.dir + item.avatar.filepath + item.avatar.filename}}"></image>
+        </view>               
+    </view>
+  </view>
+
+  <view wx:else class="scrollNull">
+    <image src="../../images/null.jpg"></image>
+    <text>这里什么都没有</text>
+  </view>
+  <!-- 评论 -->
+  <!-- <view class="publish">
+    <view class="publishCmt" bindtap="modalCmmt">
+        <view class="publishBox">
+          <image src="../../images/pen.png"></image>
+          <text>我要评论</text>
+        </view>
+        <image class="avatarIcn" src="{{avatar}}"></image>
+    </view>
+  </view> -->
+ </scroll-view>
+ <view class="publish">
+    <view class="publishCmt" bindtap="modalCmmt">
+        <view class="publishBox">
+          <image src="../../images/pen.png"></image>
+          <text>我要评论</text>
+        </view>
+        <image class="avatarIcn" src="{{avatar}}"></image>
+    </view>
+  </view>
+  <!-- 评论输入框 -->
+ <view wx:if="{{cmmtFlag}}" class="cmmtModal">
+    <view class="cmmtModalBox" >
+    <form bindsubmit="formSubmit" >
+    <view class="cmmtBoxSub">
+          <view bindtap="backBtn">返回</view>
+         <view style='font-size:32rpx;'>{{cmmtCnt}}</view>
+         <button class="cmmtBtn" formType="submit">完成</button>
+    </view>
+       <view>
+          <textarea class="cmmtText" bindinput='bindinput' maxlength="-1" cursor-spacing="40"></textarea>
+       </view>
+    </form>     
+  </view>
+ </view>
+ <!-- 提示框 -->
+ <view class="errorTips" wx:if="{{errorFlag}}"> 
+     <text>{{tipsContent}}</text>
+ </view>
+</view>
+<!-- 调用modal组件 -->  
+<modal bind:myevent="onGetCode" bind:setAccesstoken="onGetToken" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}" /> 
+ <view class="d_mask" wx:if="{{maskDisplay}}" catchtouchmove="true"></view> 

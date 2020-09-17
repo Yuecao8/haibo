@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "modal": "../modal/index",
+      "tabBar":"../tarbar/index"
+    }
+}

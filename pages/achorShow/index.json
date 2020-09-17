@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "modal": "../modal/index"
+  },
+  "navigationBarTitleText": "直播详情页",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black"
+}

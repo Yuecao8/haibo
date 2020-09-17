@@ -1,0 +1,72 @@
+<!--pages/item/item.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="wraper" wx:if="{{loadTrue}}">
+  <view class="wraper_title">{{detailItem.title}}</view>
+  <view class="wraper_text">
+    <text>{{detailItem.publish_time_format}}</text>
+    <text wx:if="{{detailItem.source}}">来源：{{detailItem.source}}</text>
+  </view>
+  <view class="wraper_content" wx:if="{{detailItem.bundle_id == 'livmedia'?true:flase}}">
+    <view class="wraper_contentVideo">
+      <video src='{{detailVideo.host+"/"+detailVideo.filepath+detailVideo.filename}}' poster='{{detailVideoPoster.host+detailVideoPoster.dir+detailVideoPoster.filepath+detailVideoPoster.filename}}'></video>
+    </view>
+    <text>{{detailItem.brief}}</text>
+  </view>
+  <view class="wraper_content" wx:elif="{{detailItem.bundle_id == 'news'?true:flase}}">
+    <!-- <view class="wraper_contentImg">
+      <image src='{{detailItem.indexpic.host+detailItem.indexpic.dir+detailItem.indexpic.filepath+detailItem.indexpic.filename}}'></image>
+    </view> -->
+    <view class="wraper_contentText">
+      <template is="wxParse" data="{{wxParseData:detailContentNew.nodes}}"/>
+    </view>
+  </view>
+  <view class="wraper_tuijian" wx:if="{{isHidden}}">
+    <text>精彩推荐</text>
+    <view class="wraper_line"></view>
+    <view class="listBox">
+      <view class='list_box' wx:for="{{newsData.listData}}" wx:key="*this" bindtap='toDetail_home' data-id='{{item.id}}'>
+        <view class="list_content" >
+          <view class="list_card">
+            <image src="{{item.indexpic==false ?'../../images/default.png':item.indexpic.host+item.indexpic.dir+item.indexpic.filepath+item.indexpic.filename}}"></image>
+          </view>
+          <view class="list_text">
+            <view>{{item.title}}</view>
+            <text>{{item.forwardTime}}</text>
+          </view>
+        </view>  
+      </view>
+    </view>
+  </view>
+  <!-- <view class="wrap_submit">
+    <view class="submit_title">
+      <image src='../../images/Page1.png'></image>
+      <text>我也有话说</text>
+    </view>
+    <view class="submit_content">
+      <form bindsubmit="formSubmit" >
+        <view class="section">
+          <textarea bindinput='bindinput' maxlength="-1" cursor-spacing="140" placeholder="来说两句吧" />
+        </view> 
+          <view class="btn_area">
+            <button formType="submit">提交</button>
+          </view>
+        </form>
+    </view>
+  </view>
+  <view class="wrap_comment" wx:if="{{isComment}}">
+    <text class="wrap_title">热门评论</text>
+    <view class="wraper_line"></view>
+    <view class="commentBox" wx:for="{{commentData}}" wx:key="*this">
+      <view class='comment_box'>
+          <view class="comment_card">
+            <image src="{{item.member_info == undefined ? '../../images/shape_default.png' : item.member_info.avatar.host+item.member_info.avatar.dir+item.member_info.avatar.filepath+item.member_info.avatar.filename}}"></image>
+          </view>
+          <view class="comment_text">
+            <view>{{item.username}}</view>
+            <text>{{item.content}}</text>
+          </view>
+      </view>
+      <view class="comment_time">{{item.forwardTime}}</view>
+    </view>
+  </view> -->
+</view>

@@ -1,0 +1,80 @@
+<!--index.wxml-->
+<view class="wrapper">
+  <view class="header">
+    <image src="{{votepic== '' ? '../../images/default.png' : votepic}}"></image>    
+  </view>
+  <view class="content">
+  <view class="card">
+    <view class="card_title">{{listData.title}}</view>
+    <view class="card_content">
+      <view class="cardList">
+        <text>{{index}}</text>
+        <text>编号</text>        
+      </view>
+      <view class="cardList">
+        <text>{{listData.top_num}}</text>
+        <text>排名</text>
+      </view>
+      <view class="cardList">
+        <text>{{listData.ini_single}}</text>
+        <text>票数</text>
+      </view>
+    </view>
+  </view>
+  <!--卡片内容结束区-->
+  <verify id="verify1" wx:if="{{verifyDisplay}}"  verifyType="{{verifyType}}" bind:verifyEvent="params"></verify>
+  <view class="voteEvent" bindtap='submit' wx:if="{{!hasVote}}">为TA投票</view>
+  <view class="hasVote" wx:if="{{hasVote}}">{{voteStausMessage}}</view>  
+  <!--个人信息介绍页-->
+  <view class="personalMessage">
+    <view class="personal_img">
+      <image src="{{listData.pictures_info=='' ?'../../images/default.png':listData.pictures_info.host+listData.pictures_info.dir+listData.pictures_info.filepath+listData.pictures_info.filename}}"></image> 
+    </view>
+      <!-- 头部滑动区域 -->
+        <view class="d_sliderArea" >
+        <!-- 头部滑动图片区域 -->
+          <view class='d_sliderImg'  wx:if="{{personalData.pic.length != 0}}">
+            <swiper indicator-dots="{{indicatorDots}}" circular="true" indicator-active-color="#fff">
+              <block wx:for="{{personalData.pic}}" wx:key="*this">
+                <swiper-item>
+                  <image src="{{item.pic_arr.host+item.pic_arr.dir+'640x300'+'/'+item.pic_arr.filepath+item.pic_arr.filename}}" class="d_slide-image" />
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+        <!-- 头部滑动图片区域 -->
+        <!-- 头部滑动视频区域 -->                  
+          <view class='d_sliderVideo' wx:if="{{personalData.video.length != 0}}" wx:for="{{personalData.video}}" wx:key="*this">
+            <video src="{{item.url}}"   controls poster="{{item.img_info}}"></video>
+          </view>
+          <!-- 头部滑动视频区域 --> 
+          <!-- 头部滑动音频区域 --> 
+          <view class='d_sliderAudio' wx:for="{{personalData.audio}}" wx:if="{{personalData.audio.length != 0}}" wx:key="*this">
+          <audio  src="{{item.url}}" id="d_myAudio" name="{{item.title}}" poster="http://img.v1.m2odemo.com/material/tuji/img/2015/08/201508251549063F4g.jpg" controls loop></audio>
+          </view>
+          <!-- 头部滑动音频区域 --> 
+          <!-- 头部滑动引用区域 --> 
+          <view class='d_sliderRefere' wx:for="{{pub_info}}" wx:if="{{pub_info.length != 0}}" bindtap="toArticle" data-id="{{item.order_id}}" data-type="{{item.module_id}}" wx:key="*this">
+            <view class='d_RefereImg'>
+              <image src="{{listData.pictures_info=='' ?'../../images/default.png':listData.pictures_info.host+listData.pictures_info.dir+listData.pictures_info.filepath+listData.pictures_info.filename}}" ></image>
+            <view class="d_refereIcon">引用</view>
+            </view>
+            <view class="d_RefereRight">
+                <view class="d_RefereTitle">{{item.title}}</view>
+                <view class="d_RefereName">{{item.module_name}}</view>
+            </view>
+          </view>
+        <!-- 头部滑动引用区域 -->
+         <!-- 头部引用描述部分 -->
+        <!-- <view class="d_refereBrief" wx:if="{{item.brief !='' && item}}"><text style="font-size:30rpx;color:#000;">描述:</text>{{item.brief}}</view>  -->
+       <!-- 头部引用描述部分 -->
+           <view class="personal_brief">
+            {{listData.describes}}
+          </view>
+        </view>
+  </view>   
+  </view>
+  <modal bind:myevent="onGetCode" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/> 
+ <view class="mask" wx:if="{{maskDisplay}}" ></view>
+  <view class="returnVote" bindtap="toReturn"  fixed="true">返回活动页面</view>
+</view>

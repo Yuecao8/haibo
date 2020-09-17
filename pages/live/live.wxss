@@ -1,0 +1,159 @@
+/* pages/live/live.wxss */
+.wrapper{
+
+}
+.tvPlayer{
+    width: 100%;
+    height: 422rpx;
+}
+.tvPlayer video{
+    width: 100%;
+    height: 422rpx; 
+}
+
+.tvContent{
+  width: 100%;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+.tvMenu{
+  width: 100%;
+  height: 106rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.menuBox{
+  box-sizing: border-box;
+  width: 48rpx;
+  height: 56rpx;
+  font-size: 20rpx;
+  color: #999999;
+  position: relative;
+}
+.tvMenu .menuBox.active{
+  color: #00aee7;
+}
+.tvMenu .menuBox.active:after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -26rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #00aee7;
+  width: 46rpx;
+  height: 6rpx;
+  border-radius: 2rpx;
+}
+.tvProgram{
+  width: 100%;
+
+}
+.programList{
+  width: 100%;
+  height: 130rpx;
+  padding: 20rpx 0 26rpx 0;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #E5E5E5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listBox{
+  height: 84rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.listTheme{
+  font-size: 32rpx;
+  color: #999999;
+}
+.themeDisplay{
+  color: #333333;
+}
+.themeIng{
+  color: #00aee7;
+}
+.scrollProgram{
+  height: calc(100vh - 528rpx);
+}
+.list{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.listSub{
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 1;
+}
+.listImg{
+  width: 32rpx;
+  height: 36rpx;
+}
+.audioShow{
+  display: block;
+}
+.audioHidden{
+  display: none;
+}
+
+/* 旋转的样式 */
+.music_on{
+  animation: audio-rotate 8s linear infinite;
+}
+
+/* 旋转动画 */
+@keyframes audio-rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+ 
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.audioBox{
+  width:100%;
+  height:422rpx;
+  position: relative;
+  box-sizing:border-box;
+}
+.audioPoster{
+  width:100%;
+  height:422rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.audioImg{
+  width:200rpx;
+  height:200rpx;
+  border-radius:50%;
+  border:4rpx solid #999999;
+  position: absolute;
+  left:0; 
+  right:0; 
+  top:0;
+  bottom:0;
+  margin:auto;
+  z-index: 100；
+}
+.audioImgstate{
+  width:100rpx;
+  height:100rpx;
+  position: absolute;
+  left:0; 
+  right:0; 
+  top:0;
+  bottom:0;
+  margin:auto;
+  z-index: 110；
+}

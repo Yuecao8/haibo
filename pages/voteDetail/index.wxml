@@ -1,0 +1,11 @@
+<view>
+    <tabBar id="tarBar" bind:tarEvent="home_tarEvent" tarBarData="{{tabData}}" wx:if="{{tabDisplay}}"></tabBar>
+  <view class="{{tabDisplay==true ? 'wrapper' : ''}}">
+    <block wx:for="{{newList.typeA}}" wx:if="{{item.id==currentTab ? true : false}}" wx:key="*this">
+        <include src="../detail/detail.wxml" />          
+    </block>
+    <block wx:for="{{newList.typeB}}" wx:if="{{item.id==currentTab ? true : false}}" wx:key="*this">  
+        <include src="../news/index.wxml" />      
+    </block>
+  </view>
+</view>

@@ -1,0 +1,155 @@
+/* pages/leakVideo/leakVideo.wxss */
+.wraper_video{
+  width: 100%;
+  height: 422rpx;
+}
+.wraper_video>video{
+  width: 100%;
+  height: 422rpx;
+}
+.warper_title{
+  width: 100%;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+.wraper_titleCnt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90rpx;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.wraper_titleCnt text{
+  font-size: 30rpx;
+  color: #00aee7;
+  font-weight: 500;
+}
+.wrap_line{
+  width: 80rpx;
+  height: 6rpx;
+  background: #00aee7;
+  border-radius:4rpx; 
+  margin: -6rpx auto 0;
+}
+.wrap_content{
+  width: 100%;
+  display: flex;
+  padding: 18rpx 24rpx 0;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-wrap:wrap; 
+}
+.wrap_recommend{
+  width: 336rpx;
+  /* height: 262rpx; */
+  box-sizing: border-box;
+  margin-bottom: 26rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap_vodeo_box{
+  width: 336rpx;
+  height: 212rpx;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+.wrap_duration{
+  position: absolute;
+  bottom: 10rpx;
+  right: 10rpx;
+  background:rgba(0,0,0,0.6);
+  border-radius: 16rpx;
+  width: 74rpx;
+  height: 30rpx;
+  font-size: 18rpx;
+  color: #FFFFFF;
+  line-height: 30rpx;
+  text-align: center;
+}
+.wrap_vodeo_box>image{
+  width: 336rpx;
+  height: 212rpx;
+  border-radius:4rpx; 
+}
+.wrap_recommend>text{
+  font-size: 22rpx;
+  color: #333333;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.reveal{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 422rpx;
+  z-index: 1;
+}
+.conceal{
+  display: none;
+  position: absolute;
+  left:0;
+  top:0;
+  height: 422rpx;
+}
+.play{
+  position: absolute;
+  left: 0;  
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 122rpx;
+  height: 122rpx;
+}
+/*  加载更多   */
+.weui-loading {
+  margin: 0 5px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-animation: weuiLoading 1s steps(12, end) infinite;
+  animation: weuiLoading 1s steps(12, end) infinite;
+  background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+  background-size: 100%;
+}
+.weui-loadmore {
+  width: 100%;
+  font-size: 24rpx;
+  color: #BDBDBD;
+  height:50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.weui-loadmore__tips {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* 什么都没有 */
+.scrollNullZb{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.scrollNullZb image{
+  width: 280rpx;
+  height: 200rpx; 
+  margin-bottom: 20rpx;
+}
+.scrollNullZb text{
+  font-size: 32rpx;
+  color: #BDBDBD;
+}

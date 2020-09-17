@@ -1,0 +1,47 @@
+/* pages/hotTw/hotTw.wxss */
+.wrap{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24rpx;
+}
+.wrap_head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap_header{
+  display: flex;
+  align-items: center;
+}
+.wrap_header image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.wrap_header text{
+  font-size: 28rpx;
+  color: #999999;
+}
+.wrap_headtime{
+  font-size: 28rpx;
+  color: #666666;
+}
+.wrap_twcnt{
+  font-size: 31rpx;
+  color: #333333;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+  line-height: 50rpx;
+  box-sizing: border-box;
+  text-indent: 2em;
+}
+.wrap_twImg{
+  width: 100%;
+}
+.wrap_twImg image{
+  width: 100%;
+}
+.wrap_twImg video{
+  width: 100%;
+}

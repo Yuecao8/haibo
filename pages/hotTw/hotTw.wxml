@@ -1,0 +1,24 @@
+<!--pages/hotTw/hotTw.wxml-->
+<wxs src='timeUtil.wxs' module='dateUtil' />
+<view class="wrap" wx:if="{{showFalg}}">
+  <view class="wrap_head">
+      <view class="wrap_header">
+          <image wx:if="{{twAvatar}}" src="{{twAvatar == '' ? '../../images/pretemit.png' : twAvatar.host + twAvatar.dir + twAvatar.filepath + twAvatar.filename}}"></image>
+          <text>{{twUser}}</text>
+      </view>     
+      <text class="wrap_headtime">{{dateUtil.dateFormat(twTime,'yyyy-MM-dd hh:mm:ss')}}</text>
+  </view>
+  <view class="wrap_content">
+      <view class="wrap_twcnt">
+        <view>{{twContent}}</view>
+      </view>
+      <view class="wrap_twImg" wx:for="{{imageArr}}" wx:key="*this">
+        <block wx:if = "{{item.type == 'image'}}">
+          <image lazy-load src="{{item.host + item.dir + item.filepath + item.filename}}" data-index='{{index}}' bindtap='previewImg'></image>
+        </block>
+        <block wx:if = "{{item.type == 'video'}}">
+          <video src="{{item.m3u8}}"></video>
+        </block>
+      </view>
+  </view>
+</view>

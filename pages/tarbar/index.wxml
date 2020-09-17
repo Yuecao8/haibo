@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view class="wrapper">
+   <view  class="wrapper_list">
+      <view class="item {{selectIndex==item.id ? 'selected': ''}}" wx:for="{{tarBarData}}" wx:key="*this"  bindtap='jump' data-id="{{item.id}}" data-type="{{item.type}}" data-columnId="{{item.columnId}}">{{item.title}}</view>
+   </view>
+   <view  class="wrapper_line">
+      <view class="line {{selectIndex==item.id ? '': 'lineShow'}}" wx:for="{{tarBarData}}" wx:key="*this" >
+        <view class="topLine"></view>
+      </view>   
+   </view>
+</view>  

@@ -1,0 +1,43 @@
+<!--pages/leakVideo/leakVideo.wxml-->
+<view class="wraper" wx:if="{{loadTrue == true}}">
+  <view class="wraper_video">
+    <!-- <block wx:if="{{ isWifi == true }}"> -->
+    <video src="{{ videoUrl }}" controls autoplay='true' ></video>
+    <!-- </block> -->
+    <!-- <block wx:else>
+      <image src="{{ imageUrl }}" class="{{ coverImageClass }}">
+        <cover-view class="play" bindtap="showVideo">
+          <cover-image class="img" src="../../images/play.png" />
+        </cover-view>
+      </image>
+      <video src="{{ videoUrl }}" id="showVideoBox" controls class="{{ videoClass }}"></video>
+    </block> -->
+  </view>
+  <view class="warper_title" wx:if="{{isHidden}}">
+    <view class='wraper_titleCnt'>
+      <text>相关视频</text>
+    </view>
+    <view class="wrap_line"></view>
+  </view>
+  <view class="wrap_content" wx:if="{{isHidden}}">
+    <view class="wrap_recommend" wx:for = "{{contentVideo}}" wx:key="{{index}}" bindtap="toCurrentVideo" data-video="{{item.video}}" data-title="{{item.title}}" data-name="{{item.date_name}}" data-image="{{item.indexpic}}" data-id="{{item.id}}" data-type="{{item.bundle_id}}">
+      <view class="wrap_vodeo_box">
+        <image lazy-load = "true" src='{{item.indexpic.host+item.indexpic.dir+"336x212"+"/"+item.indexpic.filepath+item.indexpic.filename}}'></image>
+        <view class="wrap_duration" wx:if="{{item.bundle_id === 'livmedia'}}">{{item.duration}}</view>
+      </view>      
+      <text>{{item.title}}</text>
+      <text>{{item.date_name}}</text>
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view>
+</view>
+
+<!-- 什么都没有 -->
+<view wx:if="{{loadTrue == false}}"  class="scrollNullZb">
+  <image src="../../images/null.jpg"></image>
+  <text>这里什么都没有</text>
+</view>

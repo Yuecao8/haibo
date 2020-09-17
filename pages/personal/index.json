@@ -1,0 +1,7 @@
+{
+      "usingComponents": {
+        "modal": "../modal/index",
+        "verify": "../verify/index"
+      },
+      "enablePullDownRefresh": false
+}

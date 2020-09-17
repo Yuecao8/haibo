@@ -1,0 +1,184 @@
+<!--pages/home/home.wxml-->
+<wxs src='filter.wxs' module='filter' />
+<!--导航条-->
+<view class="navTop">
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="{{index}}" bindtap="navbarTap">{{item}}</text>
+  </view> 
+</view> 
+<!--热点直播-->
+<view class="navbar_content" hidden="{{currentTab!==0}}">
+<!-- <view class="navbar_shadow"></view> -->
+  <!-- <view class="hotLive" wx:for="{{liveData}}" wx:key="{{index}}" bindtap = "toHotLive" data-id = "{{item.id}}" data-name="{{item.name}}" data-img="{{item.uri}}">
+      <image src="{{item.uri.host + item.uri.dir + item.uri.filepath + item.uri.filename}}"></image>
+  </view> -->
+  <view class="live">
+    <view class="liveBox" wx:for = "{{hotList}}" wx:key="{{index}}" bindtap="toLvie" data-id="{{item.id}}" data-liveurl="{{item.live_info[0].url}}" data-title="{{item.title}}" data-pic="{{item.indexpic}}" >
+        <image class="liveBackbord" src="{{item.indexpic != '' ? item.indexpic.host+item.indexpic.dir+item.indexpic.filepath+item.indexpic.filename : '../../images/default.png'}}"></image>
+        <view class="liveCnt">
+            <text class="liveCntTxt">{{item.title}}</text>
+            <view class="tvCntBottom">
+              <view class="btmtitle">
+                  <image class="joinImg" src="../../images/join.png"></image>
+                  <view class="desribe">
+                  {{filter.personData(item.click_num)}}
+                  </view>
+              </view>
+              <view class="btmtitle">
+                  <image class="countDown" src="../../images/count_down.png"></image>
+                  <view class="desribe">
+                  {{item.start_time_show}}
+                  </view>
+              </view>
+            </view>
+        </view> 
+        <image class="btmState" src='../../images/live.png' wx:if="{{item.time_status_text == '直播中'}}"></image> 
+        <image class="btmState" src='../../images/announce.png'  wx:if="{{item.time_status_text == '即将开始'}}"></image>
+        <image class="btmState" src='../../images/reload.png'  wx:if="{{item.time_status_text == '直播结束'}}"></image>
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view> 
+</view> 
+<!-- 点播 -->
+<view class="navbar_content" hidden="{{currentTab!==1}}">
+<!-- <view class="navbar_shadow"></view> -->
+  <view class="request">
+    <view class="request_box" wx:for="{{columnData.listData}}" wx:key="{{index}}" bindtap='toDetail_leak' data-id='{{item.id}}' data-title='{{item.name}}'>
+        <view>
+          <image lazy-load='true' src="{{item.icon.icon_1.default.host+item.icon.icon_1.default.dir+'336x204'+'/'+item.icon.icon_1.default.filepath+item.icon.icon_1.default.filename}}"></image>
+        </view>
+        <view class="request_title">
+          <view>{{item.name}}</view>
+          <!-- <text>播出时间：{{item.brief}}</text> -->
+        </view>
+    </view> 
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view>
+</view>
+<!-- 电视广播 -->
+<view class="navbar_content" hidden="{{currentTab!==2}}">
+<!-- <view class="navbar_shadow"></view> -->
+  <view class="television">
+    <view class='list_box' wx:for="{{televisionData.tvData}}" wx:if="{{televisionData.tvFlag}}" wx:key="{{index}}" bindtap='toLive' data-id="{{item.id}}" data-videourl="{{item.m3u8}}" data-num="{{item.audio_only}}" data-imgurl="{{item.snap}}" data-title="{{item.name}}">
+      <view class="list_content">
+        <view class="list_card">
+          <image src="{{item.snap.host+item.snap.dir+'274x168'+ '/' +item.snap.filepath+item.snap.filename}}"></image>
+        </view>
+        <view class="list_text">
+          <view class="list_ctt">
+            <view class="list_name">{{item.name}}</view>
+            <view class="list_img">
+              <!-- <image src='/images/rLive.png'></image> -->
+              <view class="img_icon"><text class="img_icon_text">LIVE</text></view>
+              <text>{{item.cur_program.program}}</text>
+            </view>
+          </view>         
+          <text class="list_sub">{{item.cur_program.start_time}}-{{item.next_program.start_time}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='list_box' wx:for="{{televisionData.radioData}}" wx:if="{{televisionData.radioFlag}}" wx:key="{{index}}" bindtap='toLive' data-id="{{item.id}}" data-videourl="{{item.m3u8}}" data-num="{{item.audio_only}}" data-imgurl="{{item.snap}}" data-title="{{item.name}}">
+      <view class="list_content">
+        <view class="list_card">
+          <image src="{{item.snap.host+item.snap.dir+'274x168'+ '/' +item.snap.filepath+item.snap.filename}}"></image>
+        </view>
+        <view class="list_text">
+          <view class="list_ctt">
+            <view class="list_name">{{item.name}}</view>
+            <view class="list_img">
+              <!-- <image src='/images/rLive.png'></image> -->
+              <view class="img_icon"><text class="img_icon_text">LIVE</text></view>
+              <text>{{item.cur_program.program}}</text>
+            </view>
+          </view>         
+          <text class="list_sub">{{item.cur_program.start_time}}-{{item.next_program.start_time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view>
+</view>
+<!-- 主播秀 -->
+<view class="navbar_content" hidden="{{currentTab!==3}}">
+  <view class="anchorShow">
+     <!-- tab切换 -->
+    <view class='headTab'>
+      <view class='flexLeft tabBox'>
+        <view wx:for='{{tabList}}' wx:key="index" wx:for-index="bindex" class="tabItem {{bindex == currentIndex?'active': ''}}" bindtap="changeColumn" data-id="{{bindex}}" data-sort-id="{{item.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+    <!-- 轮播图 -->
+    <view class='swiperContainer'>
+      <swiper indicator-dots="true" autoplay="true" interval="5000" duration="100" circular='true' indicator-active-color="#fff" indicator-color='#ccc'>
+        <block wx:for="{{swiperList}}" wx:key wx:for-index="index">
+          <swiper-item class="swiperItem flexMiddle">
+            <image src="{{item.host + item.dir + item.filepath + item.filename}}" class="slide-image" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 推荐主播 -->
+    <!-- 推荐直播 -->
+    <view class='liveBroadcast'>
+      <view class="flexLeft">
+        <view class="flexAlign" style="padding-left: 24rpx">
+          <image class="tuijianIcon" src="../../images/home/tuijian.png" mode="aspectFit"></image>
+        </view>
+        <text class='title'>推荐直播</text>
+      </view>
+      <ul class="flexBetween flexWrap" wx:if="{{liveBroadcastList.length > 0}}">
+        <li class="videoItem" wx:for="{{liveBroadcastList}}" wx:key="*this" bindtap="goDetail" data-id="{{item.id}}">
+          <view class='imgBox'>
+            <image src='{{item.indexpic.host + item.indexpic.dir + item.indexpic.filepath + item.indexpic.filename}}'  mode = "aspectFit" class='videoImage' lazy-load="true"></image>
+            <view class='videoStatus' wx:if="{{item.time_status == 1}}">
+              <view class='statusIcon'></view>
+              <text>直播中</text>
+            </view>
+            <view class='videoStatus' wx:if="{{item.time_status == 2}}">
+              <view class='statusIcon huigu'></view>
+              <text>回顾</text>
+            </view>
+            <view class='videoStatus' wx:if="{{item.time_status == 0}}">
+              <view class='statusIcon yugao'></view>
+              <text>预告</text>
+            </view>
+            <view class='videoNum flexAlign flexRight'>
+              <image src='../../images/home/num@1.png' class='numIcon'></image>
+              <text style="margin-right: 18rpx;">{{item.real_watch_num}}</text>
+            </view>
+          </view>
+          <text class='brief'>{{item.title}}</text>
+          <view class='videoBottom flexLeft flexAlign'>
+            <image src="{{item.anchor_info.anchor_avatar.host + item.anchor_info.anchor_avatar.dir + item.anchor_info.anchor_avatar.filepath + item.anchor_info.anchor_avatar.filename || '../../images/pretemit.png'}}" class='userIcon'></image>
+            <view class='flexBetween' style='flex: 1;'>
+              <text class='username'>{{item.anchor_info.anchor_username}}</text>
+              <text class='username'>{{item.sort_name}}</text>
+            </view>
+          </view>
+        </li>
+      </ul>
+      <view class="noData" wx:else>
+        <image src="../../images/img_nothing.png" class="noDataImg flexCenter"></image>
+        <view>暂无更多数据</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载更多</view>
+  </view>
+</view>

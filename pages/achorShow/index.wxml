@@ -1,0 +1,106 @@
+<!-- pages/detail/index.wxml -->
+<view class='detailBox'>
+  <!-- 直播  -->
+  <view class="" wx:if="{{liveDetail.time_status == 1}}">
+    <live-player src="{{videoUrl}}"  autoplay  id='liveBox'
+     bindstatechange="statechange" binderror="error" class='videoBox' autoplay='{{true}}' object-fit='fillCrop' mode="live" wx:if="{{!maskFlag}}" />
+      <view class='zhuanma' wx:else>
+        <image class="zhuanmIcon" src="../../images/zhuanma.png" alt=""></image>
+        <view>
+          直播已结束，稍后奉上直播回看
+        </view>
+      </view>
+  </view>
+  <!-- 回顾 -->
+  <view wx:elif="{{liveDetail.time_status == 2}}" class="huiguBox">
+    <view wx:if="{{videoPlay == false}}">
+      <image class="videoPoster" src="../../images/live/moren.png" mode="aspectFill"></image>
+      <image class="playBtn" src="../../images/live/play.png" bindtap="videoPlay" binderror="" wx:if="{{!maskFlag}}"></image>
+      <cover-view class='zhuanma' wx:else>
+        <cover-image class="zhuanmIcon" src="../../images/zhuanma.png" alt=""></cover-image>
+        <cover-view>
+          直播已结束，稍后奉上直播回看
+        </cover-view>
+      </cover-view>
+    </view>
+    <video id="myVideo" src="{{videoUrl}}" class='videoBox' show-play-btn='false' object-fit='cover' wx:else bindpause='videoPause' bindended='videoEnd'>
+    </video>
+  </view>
+  <!-- 预告 -->
+ <view class="" wx:elif="{{liveDetail.time_status == 0}}">
+    <image class="videoPoster" src="../../images/live/moren.png" mode="aspectFill"></image>
+ </view>
+  <!-- 头部 -->
+  <cover-view class="pageHead flexAlign">
+    <cover-view class='videoHeader flexBetween flexAlign'>
+      <cover-view class='flexLeft headLeft'>
+        <cover-image src="{{liveDetail.anchor_info.anchor_avatar.host + liveDetail.anchor_info.anchor_avatar.dir + liveDetail.anchor_info.anchor_avatar.filepath + liveDetail.anchor_info.anchor_avatar.filename || '../../images/pretemit.png'}}" class='userImg' mode = "aspectFit" ></cover-image>
+        <cover-view class='flexColumn'>
+          <cover-view class='username'>{{liveDetail.anchor_info.anchor_username}}</cover-view>
+          <cover-view class='liveStatus flexAlign' wx:if="{{liveDetail.status == 2}}">
+            <cover-view class='statusIcon huigu'></cover-view>
+            <cover-view class='username wxText'>{{liveDetail.time_status_text}}</cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="videoNum {{liveDetail.time_status == 0?'':'flexAlign'}}">
+        <cover-view class="flexLeft flexAlign" style="margin: 9rpx">
+          <cover-image src='../../images/home/num@1.png' class='numIcon'></cover-image>
+          <cover-view class="wxText">{{watch_num}}</cover-view>
+        </cover-view>
+        <cover-view class="wxText" wx:if="{{liveDetail.time_status == 0}}">开始时间：{{startTime}}</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+  <!-- 评论列表 -->
+  <view class='commnentBox'>
+    <view class='tip' wx:if="{{noticeText}}">直播消息：{{noticeText}}</view>
+    <scroll-view class='commentList' id='comment' scroll-y='true' style="height: 340rpx" scroll-top="{{toView}}" wx:if="{{liveDetail.time_status == 1}}">
+      <view class='commentItem' wx:for="{{commentList}}" wx:key wx:for-index="index">
+        <view class='user wxText'>{{item.user_info.user_name}}: </view>
+        <view class='content wxText'>{{item.message}}</view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 底部 -->
+  <view class="detailBottom flexBetween" >
+    <view class='flexLeft'>
+      <view class='iconBox' bindtap="showInput" wx:if="{{liveDetail.time_status == 1}}">
+        <image src='../../images/live/fayan.png'></image>
+      </view>
+      <view class='iconBox' bindtap="refresh" wx:if="{{liveDetail.time_status == 1}}">
+        <image src='../../images/live/shuaxin.png'></image>
+      </view>
+    </view>
+    <view class='iconBox'>
+      <image src='../../images/live/love.png' class="heart" bindtap="onClickImage"></image>
+      <view class="loveNum">{{loveNum}}</view>
+    </view>
+  </view>
+  <canvas canvas-id="mycanvas" class="canvas"/>
+  <!-- 评论框 wx:if="{{showInput}}" -->
+  <view class="comInput flexBetween" wx:if="{{showInput}}">
+    <input auto-focus placeholder="说点什么" value="{{comValue}}" bindblur="getcomValue" bindinput="getcomInput" bindblur="hideInput" />
+    <view class="btn flexAlign">
+      <view class="send-btn {{comValue!= ''?'success':''}}" bindtap='sendComment'>发送</view>
+    </view>
+  </view>
+  <!-- 评论审核 -->
+  <view class="commentSuccess" wx:if='{{commentFlag}}'>
+    <view class="mask">
+      <image class="commentOk" src="../../images/live/commentOk.png" bindload="" binderror=""></image>
+      <view class="text">评论成功，审核中</view>
+      <view class="iKnow" bindtap="closeComment" >我知道了</view>
+    </view>
+  </view>
+  <!-- 公告弹窗 -->
+  <view class="commentSuccess noticeBox" wx:if='{{liveNoticeFlag}}'>
+    <view class="mask">
+      <image class="noticeOk" src="../../images/live/notice.png" bindload="" binderror=""></image>
+      <view class="text liveNotice">{{noticeText}}</view>
+      <view class="iKnow" bindtap="closeNotice">关闭</view>
+    </view>
+  </view>
+  <modal bind:myevent="onGetCode" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/> 
+  <view class="d_mask" wx:if="{{maskDisplay}}" catchtouchmove="true"></view> 
+</view>

@@ -1,0 +1,22 @@
+<!--pages/list/list.wxml-->
+<view class="view">
+  <view class="viewList">
+    <view class="list" wx:for="{{listData}}" wx:key="*this" bindtap="jumpDetail" data-id="{{item.id}}">
+      <view class="listImg">
+        <image src="{{item.pictures_info==false ?'../../images/default.png':item.pictures_info.host+item.pictures_info.dir+item.pictures_info.filepath+item.pictures_info.filename}}"></image>
+      </view>
+      <view class="statusText statusIng" wx:if="{{item.status_flag=='ing'}}">{{item.status_text}}</view>
+      <view class="statusText statusClose" wx:elif="{{item.status_flag=='close'}}">{{item.status_text}}</view>
+      <view class="statusText statusOver" wx:elif="{{item.status_flag=='over'}}">{{item.status_text}}</view>
+      <view class="statusText statusWill" wx:else="{{item.status_flag=='will'}}">{{item.status_text}}</view>
+      <view class="listTitle">{{item.title}}</view>
+    </view>
+  </view>
+   <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+     <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+   </view>
+    <view class="weui-loadmore" hidden="{{HideLoadMore}}">
+     <view class="weui-loadmore__tips">暂无更多数据...</view>
+    </view>
+</view>
